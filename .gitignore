@@ -1,0 +1,35 @@
+# Environment variables and secrets
+.env
+.env.local
+
+# Google OAuth credentials
+credentials.json
+token.json
+generate_railway_env.py
+setup_tasks.bat
+
+# Temporary files
+.tmp/
+*.tmp
+*.temp
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
