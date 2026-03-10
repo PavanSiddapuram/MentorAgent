@@ -221,22 +221,26 @@ def compose_morning_message(row: dict, meta: dict) -> str:
     ]
     if artifact:
         parts += ["", f"<b>🎯 Expected Artifact:</b>", f"<i>{artifact}</i>"]
-    if reading:
-        # Format paper/resource links as clickable hyperlinks
-        links = [link.strip() for link in reading.split("|") if link.strip()]
-        formatted_links = []
-        for link in links:
-            if "arxiv.org" in link:
-                # Extract arxiv paper ID for label
-                paper_id = link.rstrip("/").split("/")[-1]
-                formatted_links.append(f'📄 <a href="{link}">arXiv:{paper_id}</a>')
-            elif "github.com" in link or "github.io" in link:
-                formatted_links.append(f'💻 <a href="{link}">{link.split("//")[1][:40]}</a>')
-            else:
-                # Generic resource
-                domain = link.split("//")[1].split("/")[0] if "//" in link else link[:40]
-                formatted_links.append(f'📖 <a href="{link}">{domain}</a>')
-        parts += ["", "<b>Reading / Papers:</b>"] + formatted_links
+    video_resource = row.get("Video Resource", "").strip()
+
+    if reading or video_resource:
+        parts += ["", "<b>Reading / Papers:</b>"]
+        if reading:
+            links = [link.strip() for link in reading.split("|") if link.strip()]
+            for link in links:
+                if "arxiv.org" in link:
+                    paper_id = link.rstrip("/").split("/")[-1]
+                    parts.append(f'📄 <a href="{link}">arXiv:{paper_id}</a>')
+                elif "github.com" in link or "github.io" in link:
+                    parts.append(f'💻 <a href="{link}">{link.split("//")[1][:40]}</a>')
+                else:
+                    domain = link.split("//")[1].split("/")[0] if "//" in link else link[:40]
+                    parts.append(f'📖 <a href="{link}">{domain}</a>')
+        if video_resource:
+            vid_links = [l.strip() for l in video_resource.split("|") if l.strip()]
+            for vl in vid_links:
+                parts.append(f'🎥 <a href="{vl}">YouTube Lecture</a>')
+                
     if reflection:
         parts += ["", f"<b>Think About:</b>", f"<i>{reflection}</i>"]
 
