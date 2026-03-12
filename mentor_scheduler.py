@@ -262,7 +262,7 @@ def run_morning_flow():
     3. Create Google Calendar event
     4. Send Telegram message
     """
-    print(f"\n[{datetime.now().isoformat()}] ── MORNING FLOW ──")
+    print(f"\n[{datetime.now().isoformat()}] ---------- MORNING FLOW ----------")
     bot = TelegramBot()
 
     # Bootstrap credentials with ALL scopes (Sheets + Drive + Calendar)
@@ -322,7 +322,7 @@ def run_evening_flow():
     2. Follow up based on response
     3. Update Sheet
     """
-    print(f"\n[{datetime.now().isoformat()}] ── EVENING FLOW ──")
+    print(f"\n[{datetime.now().isoformat()}] ---------- EVENING FLOW ----------")
     bot = TelegramBot()
 
     try:
@@ -513,7 +513,7 @@ def run_weekly_summary():
     Weekly summary — every Sunday 10 PM.
     Reads the last 7 rows, computes completion rate, sends summary via Telegram.
     """
-    print(f"\n[{datetime.now().isoformat()}] ── WEEKLY SUMMARY ──")
+    print(f"\n[{datetime.now().isoformat()}] ---------- WEEKLY SUMMARY ----------")
     bot = TelegramBot()
 
     try:
