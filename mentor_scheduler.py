@@ -138,26 +138,28 @@ def get_today_row(sheet_data: list[dict], meta: dict = None) -> dict | None:
 def get_meta(meta_rows: list[dict]) -> dict:
     """
     Parse meta values from the 'meta' tab.
-    Expects rows with 'Key' and 'Value' columns:
-        Key               | Value
-        ------------------|-------
-        current_streak    | 7
-        last_completed_day| 42
-        consecutive_missed| 0
+    Expects rows with 'Key' and 'Value' columns.
     """
     meta = {
         "current_streak": 0,
         "last_completed_day": 0,
         "consecutive_missed": 0,
+        "start_date": ""
     }
     for row in meta_rows:
         key = row.get("Key", "").strip()
         val = row.get("Value", "")
         if key in meta:
-            try:
-                meta[key] = int(val)
-            except (ValueError, TypeError):
-                pass
+            if key == "start_date":
+                meta[key] = str(val).strip()
+            else:
+                try:
+                    meta[key] = int(val)
+                except (ValueError, TypeError):
+                    pass
+        else:
+            # Flexible for other keys
+            meta[key] = val
     return meta
 
 
