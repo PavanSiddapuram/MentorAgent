@@ -6,6 +6,7 @@ gspread>=6.1.0
 
 # Telegram + GitHub API calls
 httpx>=0.28.0
+requests>=2.32.0
 
 # Data Processing (update_sheet.py)
 pandas>=2.2.0
